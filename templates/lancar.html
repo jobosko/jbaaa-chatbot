@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Lançar Débito por CPF</h2>
+<form method="post">
+  <div class="mb-3">
+    <label>CPF</label>
+    <input type="text" name="cpf" class="form-control" placeholder="Somente números" required>
+  </div>
+  <button class="btn btn-primary">Acessar Lançamento</button>
+</form>
+{% endblock %}

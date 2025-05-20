@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Relatório Geral por Condomínio</h2>
+
+{% for nome, info in relatorio.items() %}
+<h4 class="mt-4">🏢 {{ nome }}</h4>
+<table class="table table-bordered table-sm">
+  <thead class="table-light">
+    <tr>
+      <th>Nome</th><th>Unidade</th><th>Descrição</th><th>Vencimento</th>
+      <th>Correção</th><th>Multa</th><th>Juros</th><th>Honorários</th><th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in info.dados %}
+    <tr>
+      <td>{{ d['Nome'] }}</td>
+      <td>{{ d['Unidade'] }}</td>
+      <td>{{ d['Descrição'] }}</td>
+      <td>{{ d['Vencimento'] }}</td>
+      <td>R$ {{ d['Correção'] }}</td>
+      <td>R$ {{ d['Multa'] }}</td>
+      <td>R$ {{ d['Juros'] }}</td>
+      <td>R$ {{ d['Honorários'] }}</td>
+      <td><strong>R$ {{ d['Valor Final'] }}</strong></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot class="table-secondary">
+    <tr>
+      <th colspan="4">Totais para {{ nome }}</th>
+      <th>R$ {{ info.totais['Correção']|round(2) }}</th>
+      <th>R$ {{ info.totais['Multa']|round(2) }}</th>
+      <th>R$ {{ info.totais['Juros']|round(2) }}</th>
+      <th>R$ {{ info.totais['Honorários']|round(2) }}</th>
+      <th><strong>R$ {{ info.totais['Valor Final']|round(2) }}</strong></th>
+    </tr>
+  </tfoot>
+</table>
+{% endfor %}
+{% endblock %}
